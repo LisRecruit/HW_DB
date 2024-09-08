@@ -1,0 +1,13 @@
+WITH youngest_workers AS (
+	SELECT 'YOUNGEST'AS TYPE, NAME, BIRTHDAY
+	FROM worker
+	WHERE BIRTHDAY = (SELECT MAX(BIRTHDAY) FROM worker)
+),
+oldest_workers AS (
+	SELECT 'OLDEST' TYPE, NAME, BIRTHDAY
+	FROM worker
+	WHERE BIRTHDAY = (SELECT MIN(BIRTHDAY) FROM worker)
+)
+SELECT * FROM youngest_workers
+UNION
+SELECT * FROM oldest_workers;
